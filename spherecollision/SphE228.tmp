@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://7cwy1alh4fsq"]
+
+[ext_resource type="Script" path="res://Sphere.gd" id="1_vcwig"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6mmww"]
+
+[node name="Sphere" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0092907, 0.47093, -0.0129108)
+mesh = SubResource("SphereMesh_6mmww")
+script = ExtResource("1_vcwig")

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://gqstfh6eofc4"]
+
+[ext_resource type="PackedScene" uid="uid://7cwy1alh4fsq" path="res://Sphere.tscn" id="1_t4iwo"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4y08u"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_na07x"]
+sky_material = SubResource("ProceduralSkyMaterial_4y08u")
+
+[sub_resource type="Environment" id="Environment_iw4le"]
+background_mode = 2
+sky = SubResource("Sky_na07x")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level" type="Node3D"]
+
+[node name="Light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iw4le")
+
+[node name="Sphere" parent="." instance=ExtResource("1_t4iwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96453, 4.85349)
