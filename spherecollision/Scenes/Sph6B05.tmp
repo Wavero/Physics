@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://7cwy1alh4fsq"]
 
-[ext_resource type="Script" path="res://Sphere.gd" id="1_vcwig"]
+[ext_resource type="Script" path="res://Scripts/Sphere.gd" id="1_vcwig"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6mmww"]
 
