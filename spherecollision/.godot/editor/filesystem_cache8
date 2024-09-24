@@ -1,0 +1,7 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1727206172
+CharacterBody.gd::GDScript::-1::1727206157::0::1::::<>CharacterBody3D<>::
+icon.svg::CompressedTexture2D::1228332524795081245::1727206157::1727206173::1::::<><>::
+Level.tscn::PackedScene::455290216691921349::1727206157::0::1::::<><>::uid://7cwy1alh4fsq::::res://Sphere.tscn
+Sphere.gd::GDScript::-1::1727206157::0::1::::<>MeshInstance3D<>::
+Sphere.tscn::PackedScene::2251551750937129536::1727206157::0::1::::<><>::res://Sphere.gd
