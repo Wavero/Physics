@@ -1,44 +1,35 @@
 extends MeshInstance3D
 
 
-#Make otherObject able to be anything
-
-var otherObject = Vector3(4,3,0)
-var thisObject = Vector3(-2,5,0)
-
+@onready var otherSphere = $"../TesterSphere"
 
 #Velocity vector variables
 var previousPos
 
+var startPos
 
+#Variable names inspired from Week 1 Slides to help visualise it
+var A # Vector from Sphere 1 - Sphere 2
+var V  # Velocity Vector for Sphere 1
+var d #Distance between the centres of the two speheres at closest approach along the path of V
+var q # Angle between V and A
 
-var thisObject_length
+var e 
 
-var A
-var V = Vector3(0,0,0)
-var d
-var q
+#both placeholders
+var r1 = 0.5 # Radius 1
+var r2 = 0.5 #Radius 2
 
+#TODO
+var Vc
 
-var angleBetween 
-var closestApproach
-
-
-var vel_length
-var A_length
-const RADIUS = 0.5
-
-
-#vectors = vectors3(position) - vectors3(otherobject)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	#Initialises the variable with its starting origin
 	previousPos = global_transform.origin
+	startPos = position
 	
-	# 'position' is This sphere, and otherObject is the other sphere                                   
-	A = _getVector(position,otherObject)
-	#print(A)
 	
 	
 	pass # Replace with function body.
@@ -47,28 +38,28 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	#Move in x to test
-	position.x += 0.1 * delta
+	#Moves main sphere
+	position.x += 0.3 * delta
+	position.y += 0.3 * delta
 	
 	#Distance (Current Pos - Old Pos) / time (Delta)
-	V = (global_transform.origin - previousPos) / delta                                       #V
-	previousPos = global_transform.origin
-
-
-	# radius 1 and radius 2 squared - d squared = e 
+	V = (global_transform.origin - previousPos) / delta    #Velocity vector of sphere 1                                 
+	previousPos = global_transform.origin #Updates previousPos 
 	
-	q = (_getAngleBetweenVectors(otherObject,thisObject))
-	print(q)
-	#Projects the position onto the V vector
-	#The closest point of approach happens when the position is perpendicular to the V vector
-	#angleBetween = (V.normalized() * A.dot(V)) / vel_length                 #q
-	#print (angleBetween)
+	# 'position' is This instance, and otherObject is the other sphere
+	A = _getVector(position,otherSphere.position)   # Vector from Sphere 1 to Sphere 2 
 	
-	#closestApproach = V - angleBetween
-	#var distToCloApproach = closestApproach.length()
-	#d = distToCloApproach - (RADIUS + RADIUS) 
-	#if D is less than r1 + r2 (in this case, 1) then collision is possible
-	#print (d)
+
+	q = (_getAngleBetweenVectors(A,V))  # Find the angle between V and A
+	#print(q)
+	
+	#Using SohCahToa, d being the opposite, A being the hypotenuse, q being the angle, we can find D
+	#If D is less than the sum of R1 and R2, then collision is possible
+	d = sin(deg_to_rad(q)) * _getMagnitudeOfVector(A.x,A.y,A.z) 
+	print(d)
+	
+	#Using Pythagoras we can find e
+	e = ((r1+r2)*(r1+r2)) - (d*d)
 	
 	pass
 
@@ -76,7 +67,8 @@ func _process(delta: float) -> void:
 func _getVector(Sphere1, Sphere2):
 	return Sphere2-Sphere1
 	
-func _getMagnitudeOfVector(x,y,z):
+#Gets the length of a vector
+func _getMagnitudeOfVector(x,y,z): # I know Godot has a .length() feature but i didn't want to use it
 	return sqrt((x*x) + (y*y) + (z*z))
 	
 func _getAngleBetweenVectors(U, V):
@@ -92,6 +84,9 @@ func _getAngleBetweenVectors(U, V):
 	var formula = rad_to_deg(acos(dot / (uMag * vMag)))
 	return formula
 	
+	#Distance between two vectors
+func _getDist(a,b):
+	return a.distance_to(b)
 	
 	
 

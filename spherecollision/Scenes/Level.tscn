@@ -27,11 +27,11 @@ shadow_enabled = true
 environment = SubResource("Environment_iw4le")
 
 [node name="Sphere" parent="." instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13698, 0, 0)
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.04704)
 
 [node name="TesterSphere" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58916, 1.22655, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.735038, 1.1, 0)
 mesh = SubResource("SphereMesh_w7eo3")
