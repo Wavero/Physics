@@ -23,6 +23,8 @@ var r2 = 0.5 #Radius 2
 #TODO
 var Vc
 
+var pointOfCollision
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -45,6 +47,7 @@ func _process(delta: float) -> void:
 	#Distance (Current Pos - Old Pos) / time (Delta)
 	V = (global_transform.origin - previousPos) / delta    #Velocity vector of sphere 1                                 
 	previousPos = global_transform.origin #Updates previousPos 
+	#print(V)
 	
 	# 'position' is This instance, and otherObject is the other sphere
 	A = _getVector(position,otherSphere.position)   # Vector from Sphere 1 to Sphere 2 
@@ -59,8 +62,13 @@ func _process(delta: float) -> void:
 	print(d)
 	
 	#Using Pythagoras we can find e
-	e = ((r1+r2)*(r1+r2)) - (d*d)
+	e = sqrt((r1+r2)*(r1+r2) - (d*d))
+	#print(e)
 	
+	#No idea if this bit is right but whatever
+	Vc = _getMagnitudeOfVector(V.x,V.x,V.z) - e # Length of V - length of e is Vc i think
+	
+
 	pass
 
 #Gets the vector of sphere 1 and sphere 2
