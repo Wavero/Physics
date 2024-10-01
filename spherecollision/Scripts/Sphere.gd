@@ -12,7 +12,7 @@ var startPos
 var A # Vector from Sphere 1 - Sphere 2
 var V  # Velocity Vector for Sphere 1
 var d #Distance between the centres of the two speheres at closest approach along the path of V
-var q # Angle between V and A
+var theta # Angle between V and A
 
 var e 
 
@@ -41,26 +41,38 @@ func _process(delta: float) -> void:
 	#Moves main sphere
 	position.x += 0.3 * delta
 	position.y += 0.3 * delta
-	
+	#position.z += 0.3 * delta
 	#Distance (Current Pos - Old Pos) / time (Delta)
 	V = (global_transform.origin - previousPos) / delta    #Velocity vector of sphere 1                                 
 	previousPos = global_transform.origin #Updates previousPos 
+	#print(V)
 	
 	# 'position' is This instance, and otherObject is the other sphere
 	A = _getVector(position,otherSphere.position)   # Vector from Sphere 1 to Sphere 2 
-	
+	#print(A)
 
-	q = (_getAngleBetweenVectors(A,V))  # Find the angle between V and A
-	#print(q)
+	theta = (_getAngleBetweenVectors(A,V))  # Find the angle between V and A
+	#print(theta)
 	
-	#Using SohCahToa, d being the opposite, A being the hypotenuse, q being the angle, we can find D
+	#Using SohCahToa, d being the opposite, A being the hypotenuse, theta being the angle, we can find D
 	#If D is less than the sum of R1 and R2, then collision is possible
-	d = sin(deg_to_rad(q)) * _getMagnitudeOfVector(A.x,A.y,A.z) 
-	print(d)
+	d = sin(deg_to_rad(theta)) * _getMagnitudeOfVector(A.x,A.y,A.z) #Theta * Length of A
+	#print(d)
+	
+	
 	
 	#Using Pythagoras we can find e
 	e = ((r1+r2)*(r1+r2)) - (d*d)
 	
+	Vc = cos(deg_to_rad(theta)) * A
+	var VcLength = _getMagnitudeOfVector(Vc.x,Vc.y,Vc.z) - e
+	#print(VcLength) # When this value hits 0, we get the point of collision
+	
+	#print(_getMagnitudeOfVector(V.x,V.y,V.z))
+	#Next we need to find VC itself
+	
+
+
 	pass
 
 #Gets the vector of sphere 1 and sphere 2

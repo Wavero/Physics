@@ -33,5 +33,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13698, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.04704)
 
 [node name="TesterSphere" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.711057, 0.437, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.684006, 0.436943, 0)
 mesh = SubResource("SphereMesh_w7eo3")
