@@ -20,10 +20,11 @@ var e
 var r1 = 0.5 # Radius 1
 var r2 = 0.5 #Radius 2
 
-#TODO
-var Vc
+var inMotion = true
 
-var pointOfCollision
+var Vc
+var Vc_Length
+var collisionPoint
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,8 +42,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	#Moves main sphere
-	position.x += 0.3 * delta
-	position.y += 0.3 * delta
+	if (inMotion):
+		position.x += 0.6 * delta
+		position.y += 0.6 * delta
 	
 	#Distance (Current Pos - Old Pos) / time (Delta)
 	V = (global_transform.origin - previousPos) / delta    #Velocity vector of sphere 1                                 
@@ -51,7 +53,7 @@ func _process(delta: float) -> void:
 	
 	# 'position' is This instance, and otherObject is the other sphere
 	A = _getVector(position,otherSphere.position)   # Vector from Sphere 1 to Sphere 2 
-	
+	#print(A)
 
 	q = (_getAngleBetweenVectors(A,V))  # Find the angle between V and A
 	#print(q)
@@ -59,15 +61,30 @@ func _process(delta: float) -> void:
 	#Using SohCahToa, d being the opposite, A being the hypotenuse, q being the angle, we can find D
 	#If D is less than the sum of R1 and R2, then collision is possible
 	d = sin(deg_to_rad(q)) * _getMagnitudeOfVector(A.x,A.y,A.z) 
-	print(d)
+	#print(d)
+	if (d < r1 + r2):
+		
+		#Using Pythagoras we can find e
+		e = sqrt((r1+r2)*(r1+r2) - (d*d))
+		#print(e)
 	
-	#Using Pythagoras we can find e
-	e = sqrt((r1+r2)*(r1+r2) - (d*d))
-	#print(e)
 	
-	#No idea if this bit is right but whatever
-	Vc = _getMagnitudeOfVector(V.x,V.x,V.z) - e # Length of V - length of e is Vc i think
-	
+		
+		
+		Vc_Length = sqrt((_getMagnitudeOfVector(A.x,A.y,A.z)*_getMagnitudeOfVector(A.x,A.y,A.z)) - (d*d))
+		Vc = _getUnitVec(V) * (Vc_Length - e)
+		
+		collisionPoint = (Vc+startPos)
+		#print(Vc)
+		#print(startPos)
+		if (collisionPoint <= Vector3(0.005,0.005,0.005 and collisionPoint >= Vector3(-0.005,0.005,0.005))):
+			print("CollisonHasHappened")
+			inMotion = false
+		#print(collisionPoint)
+		print(Vc)
+		#print(_getUnitVec(V))
+		
+
 
 	pass
 
@@ -95,6 +112,10 @@ func _getAngleBetweenVectors(U, V):
 	#Distance between two vectors
 func _getDist(a,b):
 	return a.distance_to(b)
+	
+func _getUnitVec(a):
+	return (a / _getMagnitudeOfVector(a.x,a.y,a.z))
+	
 	
 	
 
