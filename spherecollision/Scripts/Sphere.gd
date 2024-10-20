@@ -3,14 +3,16 @@ extends MeshInstance3D
 
 @onready var otherSphere = $"../TesterSphere"
 
+@export var moveSpeedx := 0.0
+@export var moveSpeedy := 0.0
 #Velocity vector variables
 var previousPos
-
 
 
 #Variable names inspired from Week 1 Slides to help visualise it
 var A # Vector from Sphere 1 - Sphere 2
 var A_Mag
+
 var V  # Velocity Vector for Sphere 1
 var V_Mag
 var d #Distance between the centres of the two speheres at closest approach along the path of V
@@ -44,8 +46,8 @@ func _process(delta: float) -> void:
 	
 	#Moves main sphere
 	if (!HasCollided):
-		position.x += 0.6 * delta
-		position.y += 0.6 * delta
+		position.x += moveSpeedx * delta
+		position.y += moveSpeedy * delta
 	
 	#Distance (Current Pos - Old Pos) / time (Delta)
 	V = (global_transform.origin - previousPos) / delta    #Velocity vector of sphere 1                                 

@@ -35,6 +35,8 @@ environment = SubResource("Environment_iw4le")
 [node name="Sphere" parent="." instance=ExtResource("1_ymhy7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.609802, 0.743294, 0)
 material_override = SubResource("StandardMaterial3D_csier")
+moveSpeedx = 0.2
+moveSpeedy = 0.2
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693205, 0.963963, 3.04704)
