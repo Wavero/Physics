@@ -6,11 +6,13 @@ extends MeshInstance3D
 #Velocity vector variables
 var previousPos
 
-var startPos
+
 
 #Variable names inspired from Week 1 Slides to help visualise it
 var A # Vector from Sphere 1 - Sphere 2
+var A_Mag
 var V  # Velocity Vector for Sphere 1
+var V_Mag
 var d #Distance between the centres of the two speheres at closest approach along the path of V
 var q # Angle between V and A
 
@@ -20,18 +22,17 @@ var e
 var r1 = 0.5 # Radius 1
 var r2 = 0.5 #Radius 2
 
-var inMotion = true
+var HasCollided = false
 
 var Vc
-var Vc_Length
-var collisionPoint
+var Vc_Mag
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	#Initialises the variable with its starting origin
 	previousPos = global_transform.origin
-	startPos = position
 	
 	
 	
@@ -42,7 +43,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	#Moves main sphere
-	if (inMotion):
+	if (!HasCollided):
 		position.x += 0.6 * delta
 		position.y += 0.6 * delta
 	
@@ -53,36 +54,30 @@ func _process(delta: float) -> void:
 	
 	# 'position' is This instance, and otherObject is the other sphere
 	A = _getVector(position,otherSphere.position)   # Vector from Sphere 1 to Sphere 2 
-	#print(A)
-
-	q = (_getAngleBetweenVectors(A,V))  # Find the angle between V and A
-	#print(q)
+	A_Mag = _getMagnitudeOfVector(A.x,A.y,A.z)
+	
+	q = (_getAngleBetweenVectors(V,A))  # Find the angle between V and A
+	
 	
 	#Using SohCahToa, d being the opposite, A being the hypotenuse, q being the angle, we can find D
 	#If D is less than the sum of R1 and R2, then collision is possible
-	d = sin(deg_to_rad(q)) * _getMagnitudeOfVector(A.x,A.y,A.z) 
-	#print(d)
+	d = sin(deg_to_rad(q)) * A_Mag
+	
 	if (d < r1 + r2):
 		
 		#Using Pythagoras we can find e
 		e = sqrt((r1+r2)*(r1+r2) - (d*d))
-		#print(e)
-	
-	
 		
 		
-		Vc_Length = sqrt((_getMagnitudeOfVector(A.x,A.y,A.z)*_getMagnitudeOfVector(A.x,A.y,A.z)) - (d*d))
-		Vc = _getUnitVec(V) * (Vc_Length - e)
+		Vc_Mag = cos(deg_to_rad(q)) * A_Mag - e
+		V_Mag = _getMagnitudeOfVector(V.x,V.y,V.z)
+		Vc = _getUnitVec(V) * (Vc_Mag - e)
 		
-		collisionPoint = (Vc+startPos)
-		#print(Vc)
-		#print(startPos)
-		if (collisionPoint <= Vector3(0.005,0.005,0.005 and collisionPoint >= Vector3(-0.005,0.005,0.005))):
+		
+		if (Vc <= Vector3(0.005,0.005,0.005 and Vc >= Vector3(-0.005,0.005,0.005))):
 			print("CollisonHasHappened")
-			inMotion = false
-		#print(collisionPoint)
-		print(Vc)
-		#print(_getUnitVec(V))
+			HasCollided = true
+		
 		
 
 

@@ -33,7 +33,7 @@ shadow_enabled = true
 environment = SubResource("Environment_iw4le")
 
 [node name="Sphere" parent="." instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.609802, 0.743294, 0)
 material_override = SubResource("StandardMaterial3D_csier")
 
 [node name="Camera" type="Camera3D" parent="."]
