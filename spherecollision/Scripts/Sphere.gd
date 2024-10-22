@@ -46,8 +46,8 @@ func _process(delta: float) -> void:
 	
 	#Moves main sphere
 	if (!HasCollided):
-		position.x += moveSpeedx * delta
-		position.y += moveSpeedy * delta
+		position.x += 2 * delta
+		position.y += 2 * delta
 	
 	#Distance (Current Pos - Old Pos) / time (Delta)
 	V = (global_transform.origin - previousPos) / delta    #Velocity vector of sphere 1                                 
@@ -73,12 +73,14 @@ func _process(delta: float) -> void:
 		
 		Vc_Mag = cos(deg_to_rad(q)) * A_Mag - e
 		V_Mag = _getMagnitudeOfVector(V.x,V.y,V.z)
-		Vc = _getUnitVec(V) * (Vc_Mag - e)
+
+		Vc = (Vc_Mag * V) / V_Mag
 		
 		
 		if (Vc <= Vector3(0.005,0.005,0.005 and Vc >= Vector3(-0.005,0.005,0.005))):
 			print("CollisonHasHappened")
 			HasCollided = true
+			
 		
 		
 
