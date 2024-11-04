@@ -1,7 +1,9 @@
 extends MeshInstance3D
 
 
-@onready var otherSphere = $"../TesterSphere"
+
+
+@export var anotherSphere = MeshInstance3D
 
 @export var moveSpeedx := 0.0
 @export var moveSpeedy := 0.0
@@ -46,8 +48,8 @@ func _process(delta: float) -> void:
 	
 	#Moves main sphere
 	if (!HasCollided):
-		position.x += 2 * delta
-		position.y += 2 * delta
+		position.x += moveSpeedx * delta
+		position.y += moveSpeedy * delta
 	
 	#Distance (Current Pos - Old Pos) / time (Delta)
 	V = (global_transform.origin - previousPos) / delta    #Velocity vector of sphere 1                                 
@@ -55,7 +57,7 @@ func _process(delta: float) -> void:
 	#print(V)
 	
 	# 'position' is This instance, and otherObject is the other sphere
-	A = _getVector(position,otherSphere.position)   # Vector from Sphere 1 to Sphere 2 
+	A = _getVector(position,anotherSphere.position)   # Vector from Sphere 1 to Sphere 2 
 	A_Mag = _getMagnitudeOfVector(A.x,A.y,A.z)
 	
 	q = (_getAngleBetweenVectors(V,A))  # Find the angle between V and A
@@ -79,6 +81,7 @@ func _process(delta: float) -> void:
 		
 		if (Vc <= Vector3(0.005,0.005,0.005 and Vc >= Vector3(-0.005,0.005,0.005))):
 			print("CollisonHasHappened")
+			
 			HasCollided = true
 			
 		
