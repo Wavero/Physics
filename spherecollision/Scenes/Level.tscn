@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://gqstfh6eofc4"]
+[gd_scene load_steps=7 format=3 uid="uid://gqstfh6eofc4"]
 
 [ext_resource type="PackedScene" uid="uid://7cwy1alh4fsq" path="res://Scenes/Sphere.tscn" id="1_ymhy7"]
 
@@ -18,6 +18,8 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csier"]
 albedo_color = Color(0, 1, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xy2x"]
+
 [node name="Level" type="Node3D"]
 
 [node name="Light" type="DirectionalLight3D" parent="."]
@@ -31,15 +33,15 @@ environment = SubResource("Environment_iw4le")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172263, 1.26139, 0)
 material_override = SubResource("StandardMaterial3D_csier")
 anotherSphere = NodePath("../Sphere2")
-moveSpeedx = 2.0
-moveSpeedy = 2.0
+moveSpeedx = 2
+moveSpeedy = 2
 
 [node name="Sphere2" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02146, 3.30783, 0)
-material_override = SubResource("StandardMaterial3D_csier")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35974, 3.30783, 0)
+material_override = SubResource("StandardMaterial3D_2xy2x")
 anotherSphere = NodePath("../Sphere")
-moveSpeedx = -2.0
-moveSpeedy = -2.0
+moveSpeedx = -2
+moveSpeedy = -2
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693205, 0.963963, 3.04704)
