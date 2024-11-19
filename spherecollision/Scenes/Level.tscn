@@ -30,18 +30,16 @@ shadow_enabled = true
 environment = SubResource("Environment_iw4le")
 
 [node name="Sphere" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.172263, 1.26139, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52473, 0.693829, 0)
 material_override = SubResource("StandardMaterial3D_csier")
 anotherSphere = NodePath("../Sphere2")
 moveSpeedx = 2
 moveSpeedy = 2
 
 [node name="Sphere2" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35974, 3.30783, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.773299, 1.76853, 0)
 material_override = SubResource("StandardMaterial3D_2xy2x")
 anotherSphere = NodePath("../Sphere")
-moveSpeedx = -2
-moveSpeedy = -2
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693205, 0.963963, 3.04704)
