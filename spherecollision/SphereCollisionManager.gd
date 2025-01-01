@@ -17,7 +17,7 @@ var V2
 var r1 = 0.5 # Radius 1
 var r2 = 0.5 #Radius 2
 	
-var collisionHappened = false
+
 
 var s1_previousPos = Vector3(0,0,0)
 var s2_previousPos = Vector3(0,0,0)
@@ -36,15 +36,8 @@ func _process(delta):
 		for j in range(i+1, spheresToCheck.size()):
 			var sphere2 = spheresToCheck[j]
 			
-			if (!collisionHappened):
-				_checkCollision(sphere1,sphere2, delta)
+			_checkCollision(sphere1,sphere2, delta)
 			
-			else: #Collision happened
-				sphere1.moveSpeedx = 0
-				sphere1.moveSpeedy = 0
-				
-				sphere2.moveSpeedx = 0
-				sphere2.moveSpeedy = 0
 	pass
 
 func _checkCollision(sphere1, sphere2, delta):
@@ -57,8 +50,8 @@ func _checkCollision(sphere1, sphere2, delta):
 	V2 = (sphere2.transform.origin - s2_previousPos) / delta    #Velocity vector of sphere 1                                 
 	s2_previousPos = sphere2.transform.origin #Updates previousPos 
 	
-	if (sphere2.V_Mag != 0):
-		_stationaryCollision(sphere1,sphere2,delta)
+	
+	_stationaryCollision(sphere1,sphere2,delta)
 	
 	
 	
@@ -111,6 +104,10 @@ func _stationaryCollision(a,b,delta):
 		
 		if (Vc  <= Vector3(0.005,0.005,0.005 and Vc  >= Vector3(-0.005,-0.005,-0.005))):
 			print("CollisonHasHappened")
-			collisionHappened = true
+			
+			a.HasCollided = true
+			b.HasCollided = true
+			
+			
 			
 	pass

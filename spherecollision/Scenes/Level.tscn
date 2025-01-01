@@ -23,7 +23,7 @@ albedo_color = Color(0, 1, 1, 1)
 
 [node name="Level" type="Node3D" node_paths=PackedStringArray("spheresToCheck")]
 script = ExtResource("1_30pl3")
-spheresToCheck = [NodePath("Sphere"), NodePath("Sphere2")]
+spheresToCheck = [NodePath("Sphere"), NodePath("Sphere2"), NodePath("Sphere3")]
 
 [node name="Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.642875, 0.963963, 0)
@@ -44,6 +44,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69769, 3.32572, 0)
 material_override = SubResource("StandardMaterial3D_2xy2x")
 anotherSphere = NodePath("../Sphere")
 moveSpeedx = -2
+moveSpeedy = -2
+
+[node name="Sphere3" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26506, 3.24715, 0)
+material_override = SubResource("StandardMaterial3D_2xy2x")
+anotherSphere = NodePath("../Sphere")
+moveSpeedx = 2
 moveSpeedy = -2
 
 [node name="Camera" type="Camera3D" parent="."]
