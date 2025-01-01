@@ -16,7 +16,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(_getNormal())
+	#print(_getNormal())
 	#print(AC)
 	pass
 	#print(normal)
@@ -24,8 +24,8 @@ func _process(delta):
 
 
 func _getNormal():
-	var AB = PointB.position - PointA.position  
-	var AC = PointC.position - PointA.position
+	var AB = PointB.global_position - PointA.global_position  
+	var AC = PointC.global_position - PointA.global_position
 	
 	var normal = _crossProd(AB.x,AB.y,AB.z,AC.x,AC.y,AC.z)
 	return normal.normalized()

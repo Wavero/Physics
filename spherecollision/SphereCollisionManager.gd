@@ -128,8 +128,8 @@ func _sphereCollision(a,b,delta):
 func _sphereToPlaneCollision(sphere,plane,delta):
 	#print(plane._getNormal())
 	
-	
-	#print(_getAngleBetweenVectors(plane._getNormal(),-V1))
+	#print(-V1)
+	print(_getAngleBetweenVectors(plane._getNormal(),-V1))
 	pass
 	
 
