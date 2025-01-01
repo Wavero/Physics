@@ -1,2 +1,5 @@
 res://Scenes/Level.tscn
 res://Scenes/Sphere.tscn
+res://SphereCollisionManager.gd
+res://Scenes/Plane.tscn
+res://Scripts/Plane.gd

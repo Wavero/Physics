@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://flcqt7ayopsg"]
+
+[ext_resource type="Script" path="res://Scripts/Plane.gd" id="1_x0rwf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sd45a"]
+
+[node name="Plane" type="MeshInstance3D"]
+transform = Transform3D(4.86553, 0, 0, 0, 0.0355321, 0, 0, 0, 2.07509, 0, 0, 0)
+mesh = SubResource("BoxMesh_sd45a")
+script = ExtResource("1_x0rwf")
+
+[node name="PointA" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.5, 0, -0.5)
+
+[node name="PointB" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.5, 0, -0.5)
+
+[node name="PointC" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.5, -3.8147e-06, 0.5)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://gqstfh6eofc4"]
+[gd_scene load_steps=9 format=3 uid="uid://gqstfh6eofc4"]
 
 [ext_resource type="Script" path="res://SphereCollisionManager.gd" id="1_30pl3"]
 [ext_resource type="PackedScene" uid="uid://7cwy1alh4fsq" path="res://Scenes/Sphere.tscn" id="1_ymhy7"]
+[ext_resource type="PackedScene" uid="uid://flcqt7ayopsg" path="res://Scenes/Plane.tscn" id="3_xcj7w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4y08u"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,9 +22,10 @@ albedo_color = Color(0, 1, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xy2x"]
 
-[node name="Level" type="Node3D" node_paths=PackedStringArray("spheresToCheck")]
+[node name="Level" type="Node3D" node_paths=PackedStringArray("spheresToCheck", "planesToCheck")]
 script = ExtResource("1_30pl3")
-spheresToCheck = [NodePath("Sphere"), NodePath("Sphere2"), NodePath("Sphere3")]
+spheresToCheck = [NodePath("Sphere"), NodePath("Sphere2")]
+planesToCheck = [NodePath("Plane")]
 
 [node name="Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.642875, 0.963963, 0)
@@ -33,25 +35,20 @@ shadow_enabled = true
 environment = SubResource("Environment_iw4le")
 
 [node name="Sphere" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52473, 0.693829, 0)
+transform = Transform3D(0.999019, 0.044282, 0, -0.044282, 0.999019, 0, 0, 0, 1, 0.496561, 2.34303, -0.00351524)
 material_override = SubResource("StandardMaterial3D_csier")
 anotherSphere = NodePath("../Sphere2")
 moveSpeedx = 2
-moveSpeedy = 2
-
-[node name="Sphere2" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69769, 3.32572, 0)
-material_override = SubResource("StandardMaterial3D_2xy2x")
-anotherSphere = NodePath("../Sphere")
-moveSpeedx = -2
 moveSpeedy = -2
 
-[node name="Sphere3" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26506, 3.24715, 0)
+[node name="Sphere2" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.70546, 3.32572, 0.000899315)
 material_override = SubResource("StandardMaterial3D_2xy2x")
 anotherSphere = NodePath("../Sphere")
 moveSpeedx = 2
-moveSpeedy = -2
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693205, 0.963963, 3.04704)
+
+[node name="Plane" parent="." instance=ExtResource("3_xcj7w")]
+transform = Transform3D(4.86553, 0, 0, 0, 0.0355321, 0, 0, 0, 2.07509, -1.24648, -0.00671709, -0.000247002)
