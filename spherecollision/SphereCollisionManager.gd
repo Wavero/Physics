@@ -19,6 +19,7 @@ var V2
 
 var scuff = Vector3(0.00005,0.00005,0.00005)
 
+var baseRadius = 0.5
 var r1 = 0.5 # Radius 1
 var r2 = 0.5 #Radius 2
 	
@@ -56,11 +57,14 @@ func _checkCollision(sphere1, sphere2, delta):
 	
 	V1 = ((sphere1.transform.origin - s1_previousPos) / delta) + scuff   #Velocity vector of sphere 1                                 
 	s1_previousPos = sphere1.transform.origin #Updates previousPos 
+
 	
 	
 	V2 = ((sphere2.transform.origin - s2_previousPos) / delta) + scuff   #Velocity vector of sphere 1                                 
 	s2_previousPos = sphere2.transform.origin #Updates previousPos 
 	
+	r1 = baseRadius * sphere1.scale.x
+	r2 = baseRadius * sphere2.scale.x
 	
 	_sphereCollision(sphere1,sphere2,delta)
 	
@@ -124,6 +128,7 @@ func _sphereCollision(a,b,delta):
 			
 			
 	pass
+
 
 func _sphereToPlaneCollision(sphere,plane,delta):
 	#print(plane._getNormal())
