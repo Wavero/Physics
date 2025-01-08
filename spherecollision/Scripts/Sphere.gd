@@ -7,6 +7,7 @@ extends MeshInstance3D
 
 @export var moveSpeedx := 0
 @export var moveSpeedy := 0
+@export var mass := 1
 #Velocity vector variables
 var previousPos
 
@@ -49,7 +50,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
+	var VMag = sqrt((V.x*V.x) + (V.y*V.y) + (V.z*V.z))
 	#Moves main sphere
 	if (!HasCollided):
 		
@@ -58,7 +59,20 @@ func _process(delta: float) -> void:
 		
 		V = (transform.origin - previousPos) / delta    #Velocity vector of sphere 1                                 
 		previousPos = transform.origin #Updates previousPos 
+	if (HasCollided): #Collision Response
+		pass
+		#var newVel = _velocityImpulse(0,0,mass)
 		
+		
+func _velocityImpulse(N: int, J: int, mass: int,plus: bool):
+	if (plus):
+		return V_Mag + ((J*N)/mass)
+	if (!plus):
+		return V_Mag - ((J*N)/mass)
+		
+
+
+	
 		
 			
 			

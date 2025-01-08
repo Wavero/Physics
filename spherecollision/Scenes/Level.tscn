@@ -38,7 +38,7 @@ shadow_enabled = true
 environment = SubResource("Environment_iw4le")
 
 [node name="Sphere" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1.99804, 0.088564, 0, -0.088564, 1.99804, 0, 0, 0, 2, -1.85324, 3.34839, -0.00351524)
+transform = Transform3D(1.99804, 0.088564, 0, -0.088564, 1.99804, 0, 0, 0, 2, -1.55547, 2.71997, 0.0361633)
 material_override = SubResource("StandardMaterial3D_csier")
 mesh = SubResource("SphereMesh_ah38m")
 anotherSphere = NodePath("../Sphere2")

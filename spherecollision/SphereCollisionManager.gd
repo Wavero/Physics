@@ -125,6 +125,12 @@ func _sphereCollision(a,b,delta):
 			a.HasCollided = true
 			b.HasCollided = true
 			
+			#v1 = a._velocityImpulse()
+			#Collision has happened
+		
+		
+		#a.HasCollided = false
+		#b.HasCollided = false	
 			
 			
 	pass
@@ -132,9 +138,16 @@ func _sphereCollision(a,b,delta):
 
 func _sphereToPlaneCollision(sphere,plane,delta):
 	#print(plane._getNormal())
-	
+
 	#print(-V1)
 	print(_getAngleBetweenVectors(plane._getNormal(),-V1))
 	pass
-	
 
+func _CalcJ(V1,V2,e,m1,m2):
+	var Vr = _getMagnitudeOfVector(V1.x,V1.y,V1.z) - _getMagnitudeOfVector(V2.x,V2.y,V2.z)
+	return (Vr * (e+1))/((1/m1) + (1/m2))
+	pass
+	
+func _CalcN(S1,S2,R1,R2):
+	return (S2-S1)/(R1+R2)
+	pass
