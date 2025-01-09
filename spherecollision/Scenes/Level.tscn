@@ -37,24 +37,26 @@ shadow_enabled = true
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iw4le")
 
-[node name="Sphere" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1.99804, 0.088564, 0, -0.088564, 1.99804, 0, 0, 0, 2, -1.55547, 2.71997, 0.0361633)
+[node name="Sphere" parent="." instance=ExtResource("1_ymhy7")]
+transform = Transform3D(1.99804, 0.088564, 0, -0.088564, 1.99804, 0, 0, 0, 2, -0.835174, 2.71997, -0.199176)
 material_override = SubResource("StandardMaterial3D_csier")
 mesh = SubResource("SphereMesh_ah38m")
-anotherSphere = NodePath("../Sphere2")
 moveSpeedx = 2
 moveSpeedy = 2
+moveSpeedz = -2
+mass = 50
 
-[node name="Sphere2" parent="." node_paths=PackedStringArray("anotherSphere") instance=ExtResource("1_ymhy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.933014, 3.32572, 0.000899315)
+[node name="Sphere2" parent="." instance=ExtResource("1_ymhy7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62981, 6.47633, -3.14879)
 material_override = SubResource("StandardMaterial3D_2xy2x")
 custom_aabb = AABB(0, 0, 0, 1, 0, 0)
-anotherSphere = NodePath("../Sphere")
 moveSpeedx = -2
 moveSpeedy = -2
+moveSpeedz = 2
+mass = 5
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693205, 3.01463, 6.98939)
+transform = Transform3D(1, 0, 0, 0, 0.966743, 0.25575, 0, -0.25575, 0.966743, -1.15214, 7.79174, 8.93857)
 
 [node name="Plane" parent="." instance=ExtResource("3_xcj7w")]
 transform = Transform3D(15, 0, 0, 0, 0.036, 0, 0, 0, 15, 0, 0, 0)
