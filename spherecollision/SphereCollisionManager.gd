@@ -13,23 +13,31 @@ var Vc_Mag
 var V1
 var V2
 
+var Damping = 0.4
+
+var min_bounceYVal = 1
+var min_bounceXVal = -6.5
+var min_bounceZVal = -6.6
+
+var max_bounceYVal = 6
+var max_bounceXVal = 6.5
+var max_bounceZVal = 6.5
+
 var scuff = Vector3(0.00005,0.00005,0.00005)
 
 var baseRadius = 0.5
-var r1 = 0.5 # Radius 1
-var r2 = 0.5 #Radius 2
+var r1 = 0.5 # Radius of sphere 1
+var r2 = 0.5 #Radius of sphere 2 
 	
 
-var s1_previousPos = Vector3(0,0,0)
-var s2_previousPos = Vector3(0,0,0)
+var s1_prevPos = Vector3(0,0,0)
+var s2_prevPos = Vector3(0,0,0)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-		
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,6 +49,17 @@ func _process(delta):
 			var sphere_j = spheresToCheck[j]
 			_checkCollision(sphere_i,sphere_j, delta)
 			
+			if sphere_i.transform.origin.y < min_bounceYVal :
+				_spheretoPlaneBounce(sphere_i,delta,2,true)
+			if sphere_i.transform.origin.x < min_bounceXVal :
+				_spheretoPlaneBounce(sphere_i,delta,1,false)
+			if sphere_i.transform.origin.z < min_bounceZVal :
+				_spheretoPlaneBounce(sphere_i,delta,3,false)
+			
+			
+			if sphere_j.transform.origin.x > max_bounceXVal:
+				_spheretoPlaneBounce(sphere_j,delta,1,true)
+				pass
 		for k in range(planesToCheck.size()):
 				var plane_k = planesToCheck[k]	
 				_sphereToPlaneCollision(userSphere,plane_k,delta)
@@ -51,11 +70,11 @@ func _process(delta):
 func _checkCollision(sphere1, sphere2, delta):
 	
 	
-	V1 = ((sphere1.transform.origin - s1_previousPos) / delta) + scuff   #Velocity vector of sphere 1                                 
-	s1_previousPos = sphere1.transform.origin #Updates previousPos 
+	V1 = ((sphere1.transform.origin - s1_prevPos) / delta) + scuff   #Velocity vector of sphere 1                                 
+	s1_prevPos = sphere1.transform.origin #Updates previousPos 
 
-	V2 = ((sphere2.transform.origin - s2_previousPos) / delta) + scuff   #Velocity vector of sphere 1                                 
-	s2_previousPos = sphere2.transform.origin #Updates previousPos 
+	V2 = ((sphere2.transform.origin - s2_prevPos) / delta) + scuff   #Velocity vector of sphere 2                               
+	s2_prevPos = sphere2.transform.origin #Updates previousPos 2
 	
 	r1 = baseRadius * sphere1.scale.x
 	r2 = baseRadius * sphere2.scale.x
@@ -64,8 +83,6 @@ func _checkCollision(sphere1, sphere2, delta):
 	
 	pass
 	
-
-
 func _sphereCollision(thisBall,otherBall,delta): 
 	
 	var A = _getVector(thisBall.position,otherBall.position)   # Vector from Sphere 1 to Sphere 2 
@@ -116,9 +133,7 @@ func _sphereCollision(thisBall,otherBall,delta):
 				
 				thisBall.V = ((thisBall.V * thisBall.mass) - ((otherBall.V * otherBall.mass)))/thisBall.mass #This ball collision
 				
-		
-	
-			
+
 			
 	pass
 func _velocityImpulse(V: Vector3, N: Vector3, J: int, mass: int,plus: bool):
@@ -180,3 +195,35 @@ func _sphereToPlaneCollision(sphere,plane,delta):
 	#print(-V1)
 	#print(_getAngleBetweenVectors(plane._getNormal(),-V1))
 	pass
+
+func _spheretoPlaneBounce(sphere,delta,xyz,isTrue):
+	var velocity = sphere.V-s1_prevPos / delta
+	if (xyz == 1): # switch on int - 2 = y, 1 = x, 3 = z
+		if (!isTrue):
+		
+			velocity.x = -velocity.x * Damping 
+			sphere.V.x -= velocity.x * delta
+		if (isTrue):
+			velocity.x = -velocity.x * Damping 
+			sphere.V.x += velocity.x * delta
+		
+	if (xyz == 2): 
+		if (isTrue):
+			velocity.y = -velocity.y * Damping 
+			sphere.V.y += velocity.y * delta
+		if (!isTrue):
+			velocity.y = -velocity.y * Damping 
+			sphere.V.y -= velocity.y * delta
+		
+	
+	if (xyz == 3): 
+		if (!isTrue):
+			velocity.z = -velocity.z * Damping 
+			sphere.V.z -= velocity.z * delta
+		if (isTrue):
+			velocity.z = -velocity.z * Damping 
+			sphere.V.z += velocity.z * delta
+	
+	s1_prevPos = sphere.transform.origin
+	
+	

@@ -61,11 +61,14 @@ transform = Transform3D(1, 0, 0, 0, 0.966743, 0.25575, 0, -0.25575, 0.966743, -1
 [node name="Plane" parent="." instance=ExtResource("3_xcj7w")]
 transform = Transform3D(15, 0, 0, 0, 0.036, 0, 0, 0, 15, 0, 0, 0)
 
+[node name="Plane5" parent="." instance=ExtResource("3_xcj7w")]
+transform = Transform3D(15, 0, 0, 0, 0.036, 0, 0, 0, 15, 0, 14.7106, 0)
+
 [node name="Plane2" parent="." instance=ExtResource("3_xcj7w")]
-transform = Transform3D(15, 0, 0, 0, -1.57361e-09, 15, 0, -0.036, -6.55671e-07, 0, 7.20169, -7.50968)
+transform = Transform3D(15, 0, 0, 0, -1.57361e-09, 15, 0, -0.036, -6.55671e-07, -0.109985, 7.41329, -7.50149)
 
 [node name="Plane3" parent="." instance=ExtResource("3_xcj7w")]
-transform = Transform3D(-6.55671e-07, 0.036, 6.55671e-07, 0, -1.57361e-09, 15, 15, 1.57361e-09, -2.46304e-14, 7.45451, 7.22847, -0.00611448)
+transform = Transform3D(-6.55671e-07, 0.036, 6.55671e-07, 0, -1.57361e-09, 15, 15, 1.57361e-09, -2.46304e-14, 7.08885, 7.22847, -0.143219)
 
 [node name="Plane4" parent="." instance=ExtResource("3_xcj7w")]
 transform = Transform3D(-6.55671e-07, 0.036, 6.55671e-07, 0, -1.57361e-09, 15, 15, 1.57361e-09, -2.46304e-14, -7.51183, 7.22847, -0.00611448)
